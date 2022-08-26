@@ -20,8 +20,6 @@
  * but i prefered to apply what i learnt
  */
 
-// counter to specify attributes and number of section
-let counter = 1;
 function generateSections() {
   const mainElement = document.querySelector("main");
   for (let i = 1; i <= 4; i++) {
@@ -34,15 +32,6 @@ function generateSections() {
     </div>
     </section>`;
     mainElement.insertAdjacentHTML("beforeend", sectionElement);
-    counter++;
-  }
-  /**
-   * setTimeOut her not useful much because there are only four-section
-   * but if we add more section later it will be useful for responsive
-   */
-
-  if (counter > 5) {
-    setTimeout(generateSections, 0);
   }
 }
 generateSections();
@@ -111,7 +100,7 @@ mybutton.addEventListener("click", () => {
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 });
 
-let navbar = document.getElementById("navbar").querySelectorAll("li");
+const navbar = document.getElementById("navbar").querySelectorAll("li");
 
 navbar.forEach((item) => {
   item.addEventListener("click", function (e) {
