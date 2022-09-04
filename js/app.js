@@ -43,11 +43,9 @@ const navList = document.getElementById("navbar__list");
 // Build menu
 function createNavigationList() {
   sections.forEach((section) => {
-    const sectionName = section.getAttribute("data-nav");
-    const sectionID = section.id;
     // build the nav
     const listItem = document.createElement("li");
-    listItem.innerHTML = `<a class="menu__link" href="#${sectionID}">${sectionName}</a>`;
+    listItem.innerHTML =  `<li><a href="#${section.id}" data-nav="${section.id}" class="menu__link">${section.dataset.nav}</a></li>`;
     navList.appendChild(listItem);
   });
 }
@@ -93,15 +91,25 @@ window.onscroll = () => {
     : (mybutton.style.display = "none");
 };
 
-// When the user clicks on the button, scroll to the top of the document
+// When the user clicks on the button, the document will scroll to the top smoothly
 // //https: www.w3schools.com/howto/howto_js_scroll_to_top.asp
 mybutton.addEventListener("click", () => {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  document.body.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-const navbar = document.getElementById("navbar").querySelectorAll("li");
+// when you click on nav links will go smoothly to the target section
+navList.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (e.target.dataset.nav) {
+    document
+      .getElementById(`${e.target.dataset.nav}`)
+      .scrollIntoView({ behavior: "smooth" });
+  }
+});
 
+
+const navbar = document.getElementById("navbar").querySelectorAll("li");
+// when you click on the link it will be highlited
 navbar.forEach((item) => {
   item.addEventListener("click", function (e) {
     navbar.forEach((item) => {
@@ -112,3 +120,4 @@ navbar.forEach((item) => {
     item.classList.add("navbarclick");
   });
 });
+
